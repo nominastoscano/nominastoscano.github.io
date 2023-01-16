@@ -1,77 +1,45 @@
 function send() {
 
-    console.log('hola');
+    let DNI = document.getElementById('DNI').value;
 
-    const DNI = document.getElementById('DNI').value;
+    DNI = DNI.replace(/\D/g,'');
 
     const url_string = location.href;
     const url = new URL(url_string);
-    const test = url.searchParams.get("key");
-    console.log(test, DNI);
+    const key = url.searchParams.get("key");
+
+    const keyUser = {
+        key: key,
+        DNI: DNI
+    }
+
+    doLogin(keyUser)
 
 }
 
 function dbUrl() {
-    return 'https://script.google.com/macros/s/AKfycbzPNUO9tVWkQiu0606kiurqVapQwFx9XYcVt9EpINY/dev';
+    return 'https://script.google.com/macros/s/AKfycbxnPCeofehndGWH4_IF-GCYUsrHvLBv3S0voaW7w9waVbSSaHl38loeazamtPw1w_8x/exec';
 }
 
-function doLogin(e) {
+function doLogin(keyUser) {
 
-    e.preventDefault();
+    console.log(keyUser);
 
-    console.log('BUTTON CLICKED');
-
-    let data = Object.fromEntries(new FormData(document.getElementById('userpass')).entries());
-    // console.log(data);
-    const param0 = `${Object.keys(data)[0]}=${Object.values(data)[0]}`;
-    const param1 = `${Object.keys(data)[1]}=${Object.values(data)[1]}`;
-    const params = `?${param0}&${param1}`;
+    const key = `key=${keyUser.key}`;
+    const DNI = `DNI=${keyUser.DNI}`;
+    const params = `?${key}&${DNI}`;
 
     let url = dbUrl();
     url += params;
-    // console.log(params)
+    console.log(url);
 
     fetch(url)
-        .then(r => r.json())
-        .then(r => {
+        .then(nominaURL => nominaURL.json())
+        .then(nominaURL => {
             console.log("Promise solved");
-            // console.log(r.tempID);
-            // console.log(r.status);
-            document.getElementById('fetchResponse').textContent = r.status;
-            if (r.status === 'logging') {
-                window.location.href = `/home.html?tempID=${r.tempID}`;
-            }
+            
+            openNomina(nominaURL);
         })
-
-    document.getElementById('userpass').reset();
-}
-
-async function afterLoad() {
-
-    let url = dbUrl();
-
-    const queryString = window.location.search;
-    // console.log(queryString);
-    // const tempID = new URLSearchParams(window.location.search).get('tempID');
-    url += queryString
-
-    // console.log(tempID);
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-
-            console.log('data', data.userDB);
-
-            // addData(data.userDB);
-
-            manageHeader(data.userDB.userPersonal)
-
-            document.getElementById("beautifiedV").innerHTML = JSON.stringify(data.userDB.registroVacaciones, undefined, 2);
-
-
-        })
-        .catch(error => console.log(error));
 
 }
 
