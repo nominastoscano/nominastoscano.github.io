@@ -36,10 +36,10 @@ function doLogin(keyUser) {
     fetch(url)
         .then(nominaURL => nominaURL.json())
         .then(nominaURL => {
-            console.log("Promise solved");
             
             openNomina(nominaURL);
         })
+        // .catch(window.alert('CONTRASEÑA INCORRECTA'))
 
 }
 
@@ -48,5 +48,5 @@ function openNomina(nominaURL) {
 
     // window.location.replace(nominaURL);
     // window.location.href = nominaURL;
-    window.open(nominaURL, '_blank');
+    window.open(nominaURL ,"_self");
 }
