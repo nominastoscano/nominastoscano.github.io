@@ -18,7 +18,7 @@ function send() {
 }
 
 function dbUrl() {
-    return 'https://script.google.com/macros/s/AKfycbxnPCeofehndGWH4_IF-GCYUsrHvLBv3S0voaW7w9waVbSSaHl38loeazamtPw1w_8x/exec';
+    return 'https://script.google.com/macros/s/AKfycbzEavhHjcDDPaTlF_mVGaD7HJlRz1vPxL56PTSC18bzEcW8wYvhRKIOMnUnZCpMhrrX/exec';
 }
 
 function doLogin(keyUser) {
