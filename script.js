@@ -7,10 +7,12 @@ function send() {
     const url_string = location.href;
     const url = new URL(url_string);
     const key = url.searchParams.get("key");
+    const mail = url.searchParams.get("mail");
 
     const keyUser = {
         key: key,
-        DNI: DNI
+        DNI: DNI,
+        mail: mail
     }
 
     doLogin(keyUser)
