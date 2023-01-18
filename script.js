@@ -29,7 +29,7 @@ function doLogin(keyUser) {
 
     const key = `key=${keyUser.key}`;
     const DNI = `DNI=${keyUser.DNI}`;
-    const mail = `DNI=${keyUser.mail}`;
+    const mail = `mail=${keyUser.mail}`;
     const params = `?${key}&${DNI}&${mail}`;
 
     let url = serverSideUrl();
