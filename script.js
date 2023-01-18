@@ -17,7 +17,7 @@ function send() {
 
 }
 
-function dbUrl() {
+function serverSideUrl() {
     return 'https://script.google.com/macros/s/AKfycbzEavhHjcDDPaTlF_mVGaD7HJlRz1vPxL56PTSC18bzEcW8wYvhRKIOMnUnZCpMhrrX/exec';
 }
 
@@ -29,7 +29,7 @@ function doLogin(keyUser) {
     const DNI = `DNI=${keyUser.DNI}`;
     const params = `?${key}&${DNI}`;
 
-    let url = dbUrl();
+    let url = serverSideUrl();
     url += params;
     console.log(url);
 
