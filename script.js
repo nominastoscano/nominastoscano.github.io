@@ -47,9 +47,14 @@ function doLogin(keyUser) {
 }
 
 function openNomina(nominaURL) {
+
+    // GENERAR BOTÓN PARA DESCARGAR LA NÓMINA
+
     console.log(nominaURL);
 
     // window.location.replace(nominaURL);
     // window.location.href = nominaURL;
     window.open(nominaURL ,"_self");
 }
+
+// AL PULSAR EN EL BOTÓN DE DESCARGAR NÓMINA PODRÍA ABRIRSE UN IFRAME CON UNA FUNCIÓN ASYNC QUE MUESTRE EL IFRAME Y PUEDE QUE UNA CUENTA ATRÁS PARA DESCARGAR EL PDF. SI SE PASA LA CUENTA, EL IFRAME SE CIERRA Y SE MANDA UN FETCH CON EL key VUELVA A REVOCAR EL ACCESO DE LA NÓMINA A PRIVADO. VOLVERÍA A APARECER EL INPUT PARA INTRODUCIR EL DNI
