@@ -20,7 +20,7 @@ function send() {
 }
 
 function serverSideUrl() {
-    return 'https://script.google.com/macros/s/AKfycbwfMb97Dzys7srnzK0FAQuS0X0Zi6hyoGEPowoJ97BjtkrymoM4SMeutHoGQCN_CNsM/exec';
+    return 'https://script.google.com/macros/s/AKfycbzngZIhNwLw6dbe_QzTN4rFuxVJtVTzaS5D7fkqhaC2PDoFcevBM83kmfecSBnH4cXR/exec';
 }
 
 function doLogin(keyUser) {
