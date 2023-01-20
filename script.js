@@ -20,7 +20,7 @@ function send() {
 }
 
 function serverSideUrl() {
-    return 'https://script.google.com/macros/s/AKfycbwvjBWfwByRtqGotUhkj_J146HzovtohrlQbM2FDC5yVQ3eyyP4B5zlAtsmYvle_804/exec';
+    return 'https://script.google.com/macros/s/AKfycbypQsps0F1E5dM-ff2cjao0ScSOX3qlP_eJIQX6qAQ-KuPSnlKgfJ7AmQF_cG1-NQwm/exec';
 }
 
 function doLogin(keyUser) {
@@ -30,7 +30,7 @@ function doLogin(keyUser) {
     const key = `key=${keyUser.key}`;
     const DNI = `DNI=${keyUser.DNI}`;
     const mail = `mail=${keyUser.mail}`;
-    const params = `?${key}&${DNI}&${mail}`;
+    let params = `?${key}&${DNI}`;
 
     let url = serverSideUrl();
     url += params;
@@ -43,12 +43,12 @@ function doLogin(keyUser) {
         .then(fileID => {
 
             manageFileId(fileID);
+            hideInputField(key, DNI);
+
         })
         .catch(err => {
             wrongDNI();
         })
-    // .catch(window.alert('CONTRASEÑA INCORRECTA'))
-
 }
 
 async function manageFileId(fileID) {
@@ -97,4 +97,43 @@ function removeLoader() {
 
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function hideInputField(key, DNI) {
+    console.log('changeUI');
+
+    const input = document.getElementById('DNI');
+    input.disabled = true;
+
+    const accessTime = 20; //secs
+    await timeout(accessTime * 1000);
+
+    params = `?${key}&${DNI}&revokeAccess=1`;
+    let url = serverSideUrl();
+    url += params;
+    revokeAccess(url);
+}
+
+function revokeAccess(url) {
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                console.log('Access revoked');
+                showInputField();
+            }
+        })
+        .catch(err => {
+            console.log('error');
+        })
+}
+
+function showInputField() {
+    const input = document.getElementById('DNI');
+    input.disabled = false;
+    input.value = '';
+
+    const nominaFrame = document.getElementById('nominaFrame');
+    nominaFrame.src = '';
+
+    nominaFrame.style.boxShadow = 'none';
 }
