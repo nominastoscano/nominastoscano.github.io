@@ -20,7 +20,7 @@ function send() {
 }
 
 function serverSideUrl() {
-    return 'https://script.google.com/macros/s/AKfycbypQsps0F1E5dM-ff2cjao0ScSOX3qlP_eJIQX6qAQ-KuPSnlKgfJ7AmQF_cG1-NQwm/exec';
+    return 'https://script.google.com/macros/s/AKfycbzhy2HeAs8hl8HDCCr1ie8nESYdpsP2a53iocEDRrFP8sZ-wiWEsX2tArLAPGZpf5M/exec';
 }
 
 function doLogin(keyUser) {
@@ -99,14 +99,14 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function hideInputField(key, DNI) {
+function hideInputField(key, DNI) {
     console.log('changeUI');
 
     const input = document.getElementById('DNI');
     input.disabled = true;
 
-    const accessTime = 30; //secs
-    await timeout(accessTime * 1000);
+    // const accessTime = 30; //secs
+    // await timeout(accessTime * 1000);
 
     params = `?${key}&${DNI}&revokeAccess=1`;
     let url = serverSideUrl();
