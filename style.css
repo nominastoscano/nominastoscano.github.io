@@ -1,8 +1,11 @@
 body {
+  /* border: 1px solid red; */
   /* display: grid; */
   /* place-items: center; */
-  height: 100vh;
-  background-color: lightcyan
+  /* height: 100vh; */
+  background-color: hsl(172, 91%, 78%);
+  margin-top: 0;
+  color: hsl(170, 81%, 34%);
 }
 
 .headerContainer {
@@ -19,22 +22,49 @@ body {
 }
 
 form {
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
+  align-items: center;
   border-radius: 5px;
   padding: 1rem;
-  border: 0px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  background-color: white
+  background-color: white;
+  text-align: center;
 }
 
-div {
+.input {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  text-align: center;
 }
 
-div+div {
-  margin-top: 1rem
+input {
+  width: 50%;
+  text-align: center;
+  border: 1px solid hsl(172, 60%, 70%);
+  border-radius: .25rem;
+  padding: .2rem;
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+button {
+  width: 10rem;
+  color: hsl(170, 100%, 19%);
+  background-color: hsl(172, 91%, 78%);
+  border: 1px solid hsl(172, 60%, 70%);
+  border-radius: .25rem;
+  padding: .2rem .5rem;
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin-left: .5rem;
+}
+
+button:active {
+  background-color: hsl(172, 60%, 70%);
+  border: 1px solid hsl(172, 28%, 53%);
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 1px 1px, rgba(0, 0, 0, 0.24) 0px 1px 1px;
+  transition: 200ms;
 }
 
 label {
@@ -43,5 +73,125 @@ label {
 }
 
 .iframeContainer {
-  border: 1px solid red;
+  margin-top: .5rem;
 }
+
+.iframeContainer iframe {
+  border-radius: .5rem;
+  border: none;
+  width: calc(100vw - 1rem - 2px);
+  height: calc(1.414 * (100vw - 1rem - 2px) + 3rem);
+  box-shadow: none;
+  transition: 300ms;
+  /* filter: blur(10px); */
+}
+
+#loader {
+  display: none;
+}
+
+.loaderDiv {
+  display: grid;
+  place-items: center;
+}
+
+/*!
+ * three-dots - v0.3.2
+ * CSS loading animations made with single element
+ * https://nzbin.github.io/three-dots/
+ *
+ * Copyright (c) 2018 nzbin
+ * Released under MIT License
+ */
+ @charset "UTF-8";
+ /**
+  * ==============================================
+  * Dot Elastic
+  * ==============================================
+  */
+ .dot-elastic {
+   position: relative;
+   width: 10px;
+   height: 10px;
+   border-radius: 5px;
+   background-color: hsl(170, 81%, 34%);
+   color: hsl(170, 81%, 34%);
+   animation: dot-elastic 1s infinite linear;
+ }
+ .dot-elastic::before, .dot-elastic::after {
+   content: "";
+   display: inline-block;
+   position: absolute;
+   top: 0;
+ }
+ .dot-elastic::before {
+   left: -15px;
+   width: 10px;
+   height: 10px;
+   border-radius: 5px;
+   background-color: hsl(170, 81%, 34%);
+   color: hsl(170, 81%, 34%);
+   animation: dot-elastic-before 1s infinite linear;
+ }
+ .dot-elastic::after {
+   left: 15px;
+   width: 10px;
+   height: 10px;
+   border-radius: 5px;
+   background-color: hsl(170, 81%, 34%);
+   color: hsl(170, 81%, 34%);
+   animation: dot-elastic-after 1s infinite linear;
+ }
+ 
+ @keyframes dot-elastic-before {
+   0% {
+     transform: scale(1, 1);
+   }
+   25% {
+     transform: scale(1, 1.5);
+   }
+   50% {
+     transform: scale(1, 0.67);
+   }
+   75% {
+     transform: scale(1, 1);
+   }
+   100% {
+     transform: scale(1, 1);
+   }
+ }
+ @keyframes dot-elastic {
+   0% {
+     transform: scale(1, 1);
+   }
+   25% {
+     transform: scale(1, 1);
+   }
+   50% {
+     transform: scale(1, 1.5);
+   }
+   75% {
+     transform: scale(1, 1);
+   }
+   100% {
+     transform: scale(1, 1);
+   }
+ }
+ @keyframes dot-elastic-after {
+   0% {
+     transform: scale(1, 1);
+   }
+   25% {
+     transform: scale(1, 1);
+   }
+   50% {
+     transform: scale(1, 0.67);
+   }
+   75% {
+     transform: scale(1, 1.5);
+   }
+   100% {
+     transform: scale(1, 1);
+   }
+ }
+

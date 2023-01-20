@@ -2,7 +2,7 @@ function send() {
 
     let DNI = document.getElementById('DNI').value;
 
-    DNI = DNI.replace(/\D/g,'');
+    DNI = DNI.replace(/\D/g, '');
 
     const url_string = location.href;
     const url = new URL(url_string);
@@ -20,7 +20,7 @@ function send() {
 }
 
 function serverSideUrl() {
-    return 'https://script.google.com/macros/s/AKfycbz3Lv4_fYbnIDiwmfjDGTNegTUJkZYYokUo0pD0YcvSH4tOtzaT4EsUzY_CIzHZBs82/exec';
+    return 'https://script.google.com/macros/s/AKfycbwvjBWfwByRtqGotUhkj_J146HzovtohrlQbM2FDC5yVQ3eyyP4B5zlAtsmYvle_804/exec';
 }
 
 function doLogin(keyUser) {
@@ -36,25 +36,65 @@ function doLogin(keyUser) {
     url += params;
     console.log(url);
 
+    addLoader();
+
     fetch(url)
-        .then(nominaURL => nominaURL.json())
-        .then(nominaURL => {
-            
-            openNomina(nominaURL);
+        .then(fileID => fileID.json())
+        .then(fileID => {
+
+            manageFileId(fileID);
         })
-        // .catch(window.alert('CONTRASEÑA INCORRECTA'))
+        .catch(err => {
+            wrongDNI();
+        })
+    // .catch(window.alert('CONTRASEÑA INCORRECTA'))
 
 }
 
-function openNomina(nominaURL) {
+async function manageFileId(fileID) {
+    removeLoader();
+    const nominaFrame = document.getElementById('nominaFrame');
+    nominaFrame.src = `https://drive.google.com/file/d/${fileID}/preview`;
 
-    // GENERAR BOTÓN PARA DESCARGAR LA NÓMINA
+    nominaFrame.style.boxShadow = 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px';
+}
 
-    console.log(nominaURL);
+async function wrongDNI() {
+    removeLoader();
+    const input = document.getElementById('DNI');
+    input.value = '';
+    const boton = document.getElementById('boton');
+    boton.style.transform = 'translateX(.2rem)';
+    await timeout(50);
+    for (ii = 0; ii < 3; ii++) {
+        boton.style.transform = 'translateX(.2rem)';
+        await timeout(50);
+        boton.style.transform = 'translateX(-.2rem)';
+        await timeout(50);
+    }
+    boton.style.transform = 'translateX(0rem)';
+}
 
-    // window.location.replace(nominaURL);
-    // window.location.href = nominaURL;
-    window.open(nominaURL ,"_self");
+function addLoader() {
+    const botonDiv = document.getElementById('botonTexto');
+    botonDiv.style.display = 'none';
+    const loader = document.getElementById('loader');
+    loader.style.display = 'block';
+    const input = document.getElementById('DNI');
+    input.disabled = true;
+}
+
+function removeLoader() {
+    const botonDiv = document.getElementById('botonTexto');
+    botonDiv.style.display = 'block';
+    const loader = document.getElementById('loader');
+    loader.style.display = 'none';
+    const input = document.getElementById('DNI');
+    input.disabled = false;
 }
 
 // AL PULSAR EN EL BOTÓN DE DESCARGAR NÓMINA PODRÍA ABRIRSE UN IFRAME CON UNA FUNCIÓN ASYNC QUE MUESTRE EL IFRAME Y PUEDE QUE UNA CUENTA ATRÁS PARA DESCARGAR EL PDF. SI SE PASA LA CUENTA, EL IFRAME SE CIERRA Y SE MANDA UN FETCH CON EL key VUELVA A REVOCAR EL ACCESO DE LA NÓMINA A PRIVADO. VOLVERÍA A APARECER EL INPUT PARA INTRODUCIR EL DNI
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

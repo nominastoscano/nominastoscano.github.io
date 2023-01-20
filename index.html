@@ -15,18 +15,24 @@
             <h3>NOMINAS TOSCANO</h3>
         </div>
     </header>
-    <form  id="myform" name="myform" onsubmit="return false;" action="">
+    <form id="myform" name="myform" onsubmit="return false;" action="">
+        <label for="DNI">Escribe tu DNI sin las letras: </label>
         <div class="input">
-            <label for="DNI">Escribe tu DNI sin las letras: </label>
             <input id="DNI" name='DNI' type="number"></input>
-
-        </div>
-        <div class="btn">
-            <button type="submit" onclick="send()">VERIFICAR DNI</button>
+            <button id="boton" type="submit" onclick="send()">
+                <div id="botonTexto">MOSTRAR NÓMINA</div>
+                <div class="loaderDiv">
+                    <div id="loader" class="dot-elastic"></div>
+                </div>
+            </button>
         </div>
     </form>
+          
     <div class="iframeContainer">
-
+        <!-- https://stackoverflow.com/a/48161350/5309247 -->
+        <iframe id="nominaFrame" title="Nómina Toscano"
+            src="">
+        </iframe>
     </div>
 
     <script src="script.js"></script>
