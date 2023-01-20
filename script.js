@@ -7,12 +7,10 @@ function send() {
     const url_string = location.href;
     const url = new URL(url_string);
     const key = url.searchParams.get("key");
-    const mail = url.searchParams.get("mail");
 
     const keyUser = {
         key: key,
         DNI: DNI,
-        mail: mail
     }
 
     doLogin(keyUser)
@@ -20,7 +18,7 @@ function send() {
 }
 
 function serverSideUrl() {
-    return 'https://script.google.com/macros/s/AKfycbzhy2HeAs8hl8HDCCr1ie8nESYdpsP2a53iocEDRrFP8sZ-wiWEsX2tArLAPGZpf5M/exec';
+    return 'https://script.google.com/macros/s/AKfycbwvbZyaWiQvGiP7HWdrPk6I3r2QO379u4gpQihPu4iw7dT4z76s2s97ZN2P9bK3iQ/exec';
 }
 
 function doLogin(keyUser) {
@@ -29,7 +27,6 @@ function doLogin(keyUser) {
 
     const key = `key=${keyUser.key}`;
     const DNI = `DNI=${keyUser.DNI}`;
-    const mail = `mail=${keyUser.mail}`;
     let params = `?${key}&${DNI}`;
 
     let url = serverSideUrl();
@@ -115,6 +112,7 @@ function hideInputField(key, DNI) {
 }
 
 function revokeAccess(url) {
+    console.log('revokeAccess');
     fetch(url)
         .then(response => {
             if (response.ok) {
