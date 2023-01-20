@@ -105,7 +105,7 @@ async function hideInputField(key, DNI) {
     const input = document.getElementById('DNI');
     input.disabled = true;
 
-    const accessTime = 20; //secs
+    const accessTime = 30; //secs
     await timeout(accessTime * 1000);
 
     params = `?${key}&${DNI}&revokeAccess=1`;
