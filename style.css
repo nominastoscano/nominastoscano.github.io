@@ -16,6 +16,7 @@ body {
   color: hsl(170, 75%, 45%);
   padding: 0.5rem;
 }
+
 .headerContainer h3 {
   margin: 0;
   padding: 0;
@@ -26,7 +27,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 5px;
+  border-radius: .5rem;
   padding: 1rem;
   /* border: 1px solid lightgrey; */
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
@@ -58,13 +59,31 @@ button {
   padding: .2rem .5rem;
   box-shadow: rgba(0, 0, 0, 0.10) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   margin-left: .5rem;
+  transition: .13s;
 }
 
-button:active {
+button:enabled:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 5px, rgba(0, 0, 0, 0.35) 0px 1px 4px;
+  cursor: pointer;
+}
+
+button:enabled:active {
   background-color: hsl(172, 60%, 70%);
   border: 1px solid hsl(172, 28%, 53%);
   box-shadow: rgba(0, 0, 0, 0.10) 0px 1px 1px, rgba(0, 0, 0, 0.24) 0px 1px 1px;
   transition: 200ms;
+}
+
+button:disabled {
+  color: hsl(170, 80%, 60%);
+  background-color: white;
+  border: 1px solid hsl(172, 60%, 90%);
+  cursor: auto;
+  box-shadow: none;
+}
+
+button:disabled:hover {
+  cursor: auto;
 }
 
 label {
@@ -74,13 +93,15 @@ label {
 
 .iframeContainer {
   margin-top: .5rem;
+  /* border: 1px solid red; */
+  width: 100%;
 }
 
 .iframeContainer iframe {
   border-radius: .5rem;
   border: none;
-  width: calc(100vw - 1rem - 2px);
-  height: calc(1.414 * (100vw - 1rem - 2px) + 3rem);
+  width: 100%;
+  height: min(calc(1.414 * (100vw - 1rem - 2px) + 3rem), 32cm);
   box-shadow: none;
   transition: 300ms;
   /* filter: blur(10px); */
@@ -103,95 +124,117 @@ label {
  * Copyright (c) 2018 nzbin
  * Released under MIT License
  */
- /* @charset "UTF-8"; */
- /**
+/* @charset "UTF-8"; */
+/**
   * ==============================================
   * Dot Elastic
   * ==============================================
   */
- .dot-elastic {
-   position: relative;
-   width: 10px;
-   height: 10px;
-   border-radius: 5px;
-   background-color: hsl(170, 81%, 34%);
-   color: hsl(170, 81%, 34%);
-   animation: dot-elastic 1s infinite linear;
- }
- .dot-elastic::before, .dot-elastic::after {
-   content: "";
-   display: inline-block;
-   position: absolute;
-   top: 0;
- }
- .dot-elastic::before {
-   left: -15px;
-   width: 10px;
-   height: 10px;
-   border-radius: 5px;
-   background-color: hsl(170, 81%, 34%);
-   color: hsl(170, 81%, 34%);
-   animation: dot-elastic-before 1s infinite linear;
- }
- .dot-elastic::after {
-   left: 15px;
-   width: 10px;
-   height: 10px;
-   border-radius: 5px;
-   background-color: hsl(170, 81%, 34%);
-   color: hsl(170, 81%, 34%);
-   animation: dot-elastic-after 1s infinite linear;
- }
- 
- @keyframes dot-elastic-before {
-   0% {
-     transform: scale(1, 1);
-   }
-   25% {
-     transform: scale(1, 1.5);
-   }
-   50% {
-     transform: scale(1, 0.67);
-   }
-   75% {
-     transform: scale(1, 1);
-   }
-   100% {
-     transform: scale(1, 1);
-   }
- }
- @keyframes dot-elastic {
-   0% {
-     transform: scale(1, 1);
-   }
-   25% {
-     transform: scale(1, 1);
-   }
-   50% {
-     transform: scale(1, 1.5);
-   }
-   75% {
-     transform: scale(1, 1);
-   }
-   100% {
-     transform: scale(1, 1);
-   }
- }
- @keyframes dot-elastic-after {
-   0% {
-     transform: scale(1, 1);
-   }
-   25% {
-     transform: scale(1, 1);
-   }
-   50% {
-     transform: scale(1, 0.67);
-   }
-   75% {
-     transform: scale(1, 1.5);
-   }
-   100% {
-     transform: scale(1, 1);
-   }
- }
+.dot-elastic {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: hsl(170, 81%, 34%);
+  color: hsl(170, 81%, 34%);
+  animation: dot-elastic 1s infinite linear;
+}
 
+.dot-elastic::before,
+.dot-elastic::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-elastic::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: hsl(170, 81%, 34%);
+  color: hsl(170, 81%, 34%);
+  animation: dot-elastic-before 1s infinite linear;
+}
+
+.dot-elastic::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: hsl(170, 81%, 34%);
+  color: hsl(170, 81%, 34%);
+  animation: dot-elastic-after 1s infinite linear;
+}
+
+@keyframes dot-elastic-before {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(1, 1.5);
+  }
+
+  50% {
+    transform: scale(1, 0.67);
+  }
+
+  75% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dot-elastic {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1, 1.5);
+  }
+
+  75% {
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes dot-elastic-after {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1, 0.67);
+  }
+
+  75% {
+    transform: scale(1, 1.5);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}

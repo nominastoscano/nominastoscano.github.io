@@ -1,5 +1,7 @@
 function send() {
 
+    console.log('sending');
+
     let DNI = document.getElementById('DNI').value;
 
     DNI = DNI.replace(/\D/g, '');
@@ -52,8 +54,10 @@ async function manageFileId(fileID) {
     removeLoader();
     const nominaFrame = document.getElementById('nominaFrame');
     nominaFrame.src = `https://drive.google.com/file/d/${fileID}/preview`;
-
     nominaFrame.style.boxShadow = 'rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px';
+
+    const boton = document.getElementById('boton');
+    boton.disabled = true;
 }
 
 async function wrongDNI() {
@@ -70,6 +74,8 @@ async function wrongDNI() {
         await timeout(50);
     }
     boton.style.transform = 'translateX(0rem)';
+    
+    boton.style.cursor = 'pointer';
 }
 
 function addLoader() {
@@ -79,6 +85,8 @@ function addLoader() {
     loader.style.display = 'block';
     const input = document.getElementById('DNI');
     input.disabled = true;
+    const boton = document.getElementById('boton');
+    boton.style.cursor = 'auto';
 }
 
 function removeLoader() {
@@ -88,6 +96,8 @@ function removeLoader() {
     loader.style.display = 'none';
     const input = document.getElementById('DNI');
     input.disabled = false;
+    // const boton = document.getElementById('boton');
+    // boton.style.cursor = 'pointer';
 }
 
 // AL PULSAR EN EL BOTÓN DE DESCARGAR NÓMINA PODRÍA ABRIRSE UN IFRAME CON UNA FUNCIÓN ASYNC QUE MUESTRE EL IFRAME Y PUEDE QUE UNA CUENTA ATRÁS PARA DESCARGAR EL PDF. SI SE PASA LA CUENTA, EL IFRAME SE CIERRA Y SE MANDA UN FETCH CON EL key VUELVA A REVOCAR EL ACCESO DE LA NÓMINA A PRIVADO. VOLVERÍA A APARECER EL INPUT PARA INTRODUCIR EL DNI
@@ -129,6 +139,10 @@ function showInputField() {
     const input = document.getElementById('DNI');
     input.disabled = false;
     input.value = '';
+
+    const boton = document.getElementById('boton');
+    boton.disabled = false;
+    boton.style.cursor = 'pointer';
 
     const nominaFrame = document.getElementById('nominaFrame');
     nominaFrame.src = '';
