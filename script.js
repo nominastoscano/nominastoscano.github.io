@@ -111,6 +111,7 @@ function hideInputField(key, DNI) {
 
     const input = document.getElementById('DNI');
     input.disabled = true;
+    input.classList.add('accessGranted');
 
     // const accessTime = 30; //secs
     // await timeout(accessTime * 1000);
@@ -119,6 +120,9 @@ function hideInputField(key, DNI) {
     let url = serverSideUrl();
     url += params;
     revokeAccess(url);
+
+    const progressBar = document.getElementById('progressBar');
+    progressBar.classList.add('progressBarAnimate');
 }
 
 function revokeAccess(url) {
@@ -138,6 +142,7 @@ function revokeAccess(url) {
 function showInputField() {
     const input = document.getElementById('DNI');
     input.disabled = false;
+    input.classList.remove('accessGranted');
     input.value = '';
 
     const boton = document.getElementById('boton');
@@ -148,4 +153,7 @@ function showInputField() {
     nominaFrame.src = '';
 
     nominaFrame.style.boxShadow = 'none';
+
+    const progressBar = document.getElementById('progressBar');
+    progressBar.classList.remove('progressBarAnimate');
 }
